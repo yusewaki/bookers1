@@ -1,6 +1,7 @@
 <h1>Editing Book</h1>
 
 <%= form_with model:@book,local:true do |f| %>
+<%= render 'layouts/messages', model: f.object %>
   <p>Title</p>
   <%= f.text_field :title %>
   
@@ -9,3 +10,6 @@
   
   <%= f.submit "Update Book" %>
 <% end %>
+
+<%= link_to "Show", book_path(@book) %>
+<%= link_to "Back", "/books" %>

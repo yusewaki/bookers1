@@ -14,9 +14,9 @@ class BooksController < ApplicationController
     if book.save
         redirect_to book_path(book)
         flash[:success] = "Book was successfully created."
-      else
+    else
         @books = Book.all
-        @book = Book.new
+        @book = book
         render 'index'
     end
   end
@@ -40,9 +40,14 @@ class BooksController < ApplicationController
 
   def update
     book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id)
-    flash[:success] = "Book was successfully created."
+    
+    if book.update(book_params)
+      redirect_to book_path(book.id)
+      flash[:success] = "Book was successfully created."
+    else
+      @book = book
+      render 'edit'
+    end
   end
 
 
